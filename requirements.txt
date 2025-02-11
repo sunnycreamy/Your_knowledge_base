@@ -1,0 +1,18 @@
+按顺序下载包
+# 核心包
+streamlit==1.41.1
+langchain==0.1.11
+langchain-community==0.0.29
+langchain-core==0.1.36
+
+# 数据库和处理
+chromadb==0.4.14
+PyPDF2
+pysqlite3-binary
+
+# AI相关
+zhipuai==2.0.1
+
+# 其他依赖
+python-dotenv
+pydantic

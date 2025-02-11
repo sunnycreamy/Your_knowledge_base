@@ -7,11 +7,11 @@ __pycache__/
 # 环境变量
 .env
 .env.*
-!.env.example
+
 
 # 数据目录
 data_base/vector_db/
-data_base/knowledge_base/
+data_base/knowledge_db/
 *.sqlite3
 
 # macOS系统文件
