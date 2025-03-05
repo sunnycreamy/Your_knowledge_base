@@ -15,9 +15,6 @@ Google账户（用于Google Drive API授权）
 
 安装步骤
 1. 克隆项目
-bash
-git clone https://github.com/yourusername/document-processing-system.git
-cd document-processing-system
 
 2. 安装依赖
 bash
