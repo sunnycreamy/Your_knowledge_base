@@ -1,123 +1,110 @@
-# 智能文档问答系统
+knowledge_base
+这是一个基于Python的智能文档处理系统，集成了Google Drive同步、向量数据库存储和自然语言处理功能，帮助用户高效管理和检索文档信息。
+功能特点
+Google Drive同步：自动同步指定Google Drive文件夹中的文档
+智能文档处理：支持多种文档格式（PDF、Word、文本等）的解析和处理
+向量数据库存储：使用Chroma DB进行高效的语义检索
+自然语言查询：通过自然语言提问获取文档中的信息
+日志系统：完善的日志记录，便于调试和问题追踪
 
-基于智谱AI的PDF文档问答系统，支持分类管理和智能问答。
+安装指南
+前提条件
+Python 3.8+
+网络连接（用于API调用和Google Drive访问）
+Google账户（用于Google Drive API授权）
 
-## 功能特点
+安装步骤
+1. 克隆项目
+bash
+git clone https://github.com/yourusername/document-processing-system.git
+cd document-processing-system
 
-- 📚 支持PDF文件管理和分类
-- 🔍 全局/分类查询模式
-- 💡 智能问答功能
-- ✅ 文件状态检查
-- 🔄 向量数据库管理
-- 📤 文件临时上传功能
-
-## 目录结构
-
-your-project-name/
-├── m_stereamlit_zhipu.py # 主程序
-├── zhipuai_embedding.py # 向量化模块
-├── zhipuai_llm.py # LLM接口
-├── requirements.txt # 依赖列表
-├── .env # 环境变量
-├── README.md # 项目说明
-└── data_base/ # 数据目录
-├── knowledge_db/ # PDF文件存储
-└── vector_db/ # 向量数据库
-```
-
-## 快速开始
-
-### 1. 环境配置
-```bash
-# 创建新环境
-conda create -n your-env-name python=3.9
-
-# 激活环境
-conda activate your-env-name
-
-# 安装依赖包
+2. 安装依赖
+bash
 pip install -r requirements.txt
-```
 
-### 2. 配置API密钥
-复制环境变量示例文件：
-```bash
+3. 配置环境变量
+编辑.env文件
 cp .env.example .env
-```
-编辑 .env 文件，填入你的 API Key：
+bash
 ```
 ZHIPUAI_API_KEY=你的智谱API密钥
+OLLAMA_URL=http://localhost:11434
 ```
 
-### 3. 创建必要目录
+3. 运行应用
+```bash
+streamlit run main.py
+```
+
+使用指南
+
+模型选择
+- 智谱GLM4：需要配置API密钥
+- Ollama模型：需要本地运行Ollama服务
+
+对话模式
+1. 知识库对话
+   - 上传文档到知识库
+   - 基于知识库内容进行问答
+2. 文档对话
+   - 选择特定文档进行对话
+3. 自由对话
+   - 无限制的AI对话模式
+   - 网络连接
+
+文档管理
+- 支持新建分类
+- 文档上传和管理
+- 自动向量化处理
+- 手动增量更新数据库
+
+注意事项
+
+1. 首次使用需完成环境配置
+2. 确保模型服务正常运行
+3. 大文件处理可能需要较长时间
+4. 定期维护知识库
+
+## 初始化知识库
+
+首次使用需要创建必要的目录结构：
+
+1. 创建知识库目录
 ```bash
 mkdir -p data_base/knowledge_db
-mkdir -p data_base/vector_db/chroma
+mkdir -p data_base/vector_db
 ```
 
-### 4. 运行应用
+2. 添加文档
+- 将你的文档文件放入 `data_base/knowledge_db` 目录
+- 支持的格式：PDF、Word、TXT 等
+
+3. 构建向量库
 ```bash
-streamlit run m_stereamlit_zhipu.py
+python scripts/init_vector_db.py
 ```
 
-## 使用指南
+注意：
+- 首次构建向量库可能需要一些时间，取决于文档数量和大小
+- 确保已正确配置模型 API（智谱GLM4或Ollama）
+- 向量库构建完成后，系统即可进行文档问答
 
-### PDF文件管理
-1. 创建分类目录：
-```bash
-mkdir -p data_base/knowledge_db/你的分类名称
+## 目录结构说明
+```
+data_base/
+├── knowledge_db/           # 存放原始文档
+│   ├── Autobiography/     # 自传类文档
+│   ├── history/          # 历史类文档
+│   ├── life_weekly/      # 生活周刊
+│   ├── literature/       # 文学作品
+│   ├── society/         # 社会类文档
+│   └── technology/      # 技术文档
+└── vector_db/           # 存放向量化后的数据
 ```
 
-2. 添加PDF文件：
-- 将PDF文件放入对应分类目录
-- 或使用界面的临时上传功能
+可以根据个人需求创建不同的文档分类目录。建议的分类方式：
+1. 使用英文目录名，避免中文路径可能造成的编码问题
 
-### 知识库管理
-1. 检查文件状态：使用侧边栏的"系统维护"
-2. 重建知识库：首次使用或添加新文件后
 
-### 问答功能
-1. 选择查询模式：
-   - 全局查询：搜索所有文档
-   - 分类查询：指定分类和文件
-2. 选择问答方式：
-   - qa_chain：适合文档问答
-   - chat_qa_chain：支持上下文对话
-   - chat：通用对话模式
 
-## 常见问题
-
-1. **找不到文档内容？**
-   - 检查文件是否正确放置
-   - 重建向量数据库
-   - 确认文件编码格式
-
-2. **回答质量不理想？**
-   - 尝试更具体的问题
-   - 使用分类查询模式
-   - 选择合适的问答方式
-
-## 维护命令
-
-```bash
-# 查看环境
-conda info --envs
-
-# 查看已安装包
-pip list
-
-# 更新依赖
-pip install -r requirements.txt --upgrade
-```
-
-## 注意事项
-
-1. 确保API密钥配置正确
-2. PDF文件需放在正确的分类目录
-3. 大文件处理可能需要较长时间
-4. 定期备份重要文档
-5. 临时上传的文件不会永久保存
-
-## 许可证
-
-MIT License

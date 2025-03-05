@@ -4,25 +4,74 @@ __pycache__/
 *.pyo
 *.pyd
 
-# 环境变量
+# 环境变量/敏感信息
+venv/
+ENV/
 .env
-.env.*
-
+service_account.json
+client_secret.json
+token.pickle
+*.pem
+*.key
+sync_record.json
+config/secrets.py
 
 # 数据目录
-data_base/vector_db/
-data_base/knowledge_db/
+# 向量数据库文件
+data_base/vector_db/chroma_db/*
+!data_base/vector_db/chroma_db/.gitkeep
+!data_base/vector_db/chroma_db/README.md
+
+# 知识库文档
+data_base/knowledge_db/*/*
+!data_base/knowledge_db/*/.gitkeep
+!data_base/knowledge_db/*/README.md
 *.sqlite3
+vector_store/
+*.pkl
+*.db
 
 # macOS系统文件
 .DS_Store
 
 # Streamlit
-.streamlit/
+.streamlit/secrets.toml
 
 # IDE配置
 .vscode/
 .idea/
 
+# 个人笔记
+解释.txt
 
+#引用文件
+reference/
+# 日志
+logs/
+*.log
 
+# Python相关
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 其他
+*.bak
+*.tmp
