@@ -1,17 +1,21 @@
-#knowledge_base
+# knowledge_base
 -这是一个基于Python的智能文档处理系统，集成了Google Drive同步、向量数据库存储和自然语言处理功能，帮助用户高效管理和检索文档信息。
 ## 功能特点
 -Google Drive同步：自动同步指定Google Drive文件夹中的文档
+
 -智能文档处理：支持多种文档格式（PDF、Word、文本等）的解析和处理
+
 -向量数据库存储：使用Chroma DB进行高效的语义检索
+
 -自然语言查询：通过自然语言提问获取文档中的信息
+
 -日志系统：完善的日志记录，便于调试和问题追踪
 
 ## 安装指南
 前提条件
-Python 3.8+
-网络连接（用于API调用和Google Drive访问）
-Google账户（用于Google Drive API授权）
+* Python 3.8+
+* 网络连接（用于API调用和Google Drive访问）
+* Google账户（用于Google Drive API授权）
 
 安装步骤
 1. 克隆项目
